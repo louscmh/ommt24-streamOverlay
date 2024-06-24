@@ -53,6 +53,10 @@ let mapSR = document.getElementById("mapSR");
 let mapBPM = document.getElementById("mapBPM");
 let mapLength = document.getElementById("mapLength");
 let stageText = document.getElementById("stageText");
+let statDetails = document.getElementById("statDetails");
+
+let beatmapTitleDelay = document.getElementById("songDelay");
+let beatmapArtistDelay = document.getElementById("artistDelay");
 
 // PLACEHOLDER VARS /////////////////////////////////////////////////////////////////
 let currentFile = "";
@@ -96,15 +100,9 @@ async function updateDetails(data) {
     mapSR.innerHTML = fullSR.toFixed(2);
     mapBPM.innerHTML = min === max ? min : `${min} - ${max}`;
     mapLength.innerHTML = parseTime(full);
-}
 
-async function adjustFont(title, boundaryWidth, originalFontSize) {
-    if (title.scrollWidth > boundaryWidth) {
-		let ratio = (title.scrollWidth/boundaryWidth);
-        title.style.fontSize = `${originalFontSize/ratio}px`;
-    } else {
-		title.style.fontSize = `${originalFontSize}px`;
-	}
+    makeScrollingText(beatmapTitle, beatmapTitleDelay,20,620,40);
+    makeScrollingText(beatmapArtist, beatmapArtistDelay,20,620,40);
 }
 
 const parseTime = ms => {
@@ -144,4 +142,25 @@ function parseDateTime(dateTimeString) {
     date.setUTCDate(day);
 
     return date;
+}
+
+async function makeScrollingText(title, titleDelay, rate, boundaryWidth, padding) {
+    if (title.scrollWidth > boundaryWidth) {
+        titleDelay.innerHTML = title.innerHTML;
+		let ratio = (title.scrollWidth/boundaryWidth)*rate
+		title.style.animation = `scrollText ${ratio}s linear infinite`;
+		titleDelay.style.animation = `scrollText ${ratio}s linear infinite`;
+		titleDelay.style.animationDelay = `${-ratio/2}s`;
+		titleDelay.style.paddingRight = `${padding}px`;
+		title.style.paddingRight = `${padding}px`;
+        titleDelay.style.marginTop = `-${title.offsetHeight}px`;
+        titleDelay.style.display = "initial";
+    } else {
+        titleDelay.style.display = "none";
+		title.style.animation = "none";
+		titleDelay.style.animation = "none";
+		titleDelay.style.paddingRight = "0px";
+        titleDelay.style.marginTop = `0px`;
+		title.style.paddingRight = "0px";
+	}
 }

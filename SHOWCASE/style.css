@@ -65,14 +65,42 @@
     width:200px;
 }
 
+#songDetails {
+    width:620px;
+    overflow:hidden;
+    white-space: nowrap;
+    display:flex;
+    flex-direction: column;
+}
+
 #songName {
     font-family: "Neue-Regrade-Bold-Italic";
     font-size:24px;
+    width:fit-content;
+    white-space: nowrap;
+}
+
+#songDelay {
+    font-family: "Neue-Regrade-Bold-Italic";
+    font-size:24px;
+    width:fit-content;
+    white-space: nowrap;
+    display:none;
 }
 
 #artistName {
     font-family: "Neue-Regrade-Regular-Italic";
     font-size:24px;
+    width:fit-content;
+    white-space: nowrap;
+}
+
+#artistDelay {
+    font-family: "Neue-Regrade-Regular-Italic";
+    font-size:24px;
+    width:fit-content;
+    white-space: nowrap;
+    display:none;
 }
 
 #statDetails {
@@ -96,4 +124,13 @@
 
 .staticStatText {
     margin-left:24px;
+}
+
+@keyframes scrollText {
+	0% {
+	  transform: translateX(100%);
+	}
+	100% {
+	  transform: translateX(-100%);
+	}
 }
