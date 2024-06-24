@@ -1,10 +1,8 @@
 [
-    { "beatmapId": 1653225, "pick": "NM1"},
-    { "beatmapId": 2601556, "pick": "NM2"},
-    { "beatmapId": 3763961, "pick": "NM3"},
-    { "beatmapId": 3845085, "pick": "NM4"},
-    { "beatmapId": 4060407, "pick": "NM5"},
-    { "beatmapId": 2601556, "pick": "NM2"},
-    { "beatmapId": 3763961, "pick": "NM3"},
-    { "beatmapId": 3845085, "pick": "NM4"}
+    { "beatmapId": 4569336, "pick": "SV1"},
+    { "beatmapId": 4590793, "pick": "RC1"},
+    { "beatmapId": 4635740, "pick": "RC2"},
+    { "beatmapId": 4653807, "pick": "LN1"},
+    { "beatmapId": 4578751, "pick": "LN2"},
+    { "beatmapId": 3785840, "pick": "HB1"}
 ]
