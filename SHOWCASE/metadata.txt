@@ -1,0 +1,6 @@
+Usecase: obs-overlay
+Name: OMMT24-Showcase
+Author: lous
+CompatibleWith: gosu,tosu
+Resolution: 1920x1080
+authorLinks: https://github.com/louscmh, https://twitter.com/ruuiecmh
