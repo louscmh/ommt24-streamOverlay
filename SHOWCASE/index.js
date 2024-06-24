@@ -29,6 +29,20 @@ let beatmaps = [];
 })();
 console.log(beatmapSet);
 
+// SHOWCASE DATES DATA /////////////////////////////////////////////////////////////////
+let dates = [];
+(async () => {
+    try {
+        const jsonData = await $.getJSON("../_data/showcase.json");
+        jsonData.map((round) => {
+            dates.push(round);
+        });
+    } catch (error) {
+        console.error("Could not read JSON file", error);
+    }
+})();
+console.log(dates);
+
 // HTML VARS /////////////////////////////////////////////////////////////////
 let beatmapTitle = document.getElementById("songName");
 let beatmapArtist = document.getElementById("artistName");
@@ -38,10 +52,12 @@ let mapOD = document.getElementById("mapOD");
 let mapSR = document.getElementById("mapSR");
 let mapBPM = document.getElementById("mapBPM");
 let mapLength = document.getElementById("mapLength");
+let stageText = document.getElementById("stageText");
 
 // PLACEHOLDER VARS /////////////////////////////////////////////////////////////////
 let currentFile = "";
 let gameState;
+let currentStage;
 
 socket.onmessage = event => {
     let data = JSON.parse(event.data);
@@ -49,6 +65,11 @@ socket.onmessage = event => {
     let file = data.menu.bm.path.file;
     if (currentFile != file) {
         updateDetails(data);
+    }
+
+    if (currentStage != getCurrentStage()) {
+        currentStage = getCurrentStage()
+        stageText.innerHTML = currentStage;
     }
 }
 
@@ -90,4 +111,37 @@ const parseTime = ms => {
 	const second = Math.floor(ms / 1000) % 60 + '';
 	const minute = Math.floor(ms / 1000 / 60) + '';
 	return `${'0'.repeat(2 - minute.length) + minute}:${'0'.repeat(2 - second.length) + second}`;
+}
+
+function getCurrentStage() {
+    var date = new Date();
+    var day = date.getUTCDate();
+    var month = date.getUTCMonth()+1;
+
+    console.log(`${day}, ${month}`);
+
+    for (let stage of dates) {
+        stageDate = parseDateTime(stage["date"]);
+        // console.log(`${stageDate.getUTCDate()}, ${stageDate.getUTCMonth()}`);
+        if (stageDate.getUTCDate() == day && stageDate.getUTCMonth()+1 == month) {
+            return stage["stage"];
+        }
+    }
+    return "No Stage Detected";
+}
+
+function parseDateTime(dateTimeString) {
+    // console.log(dateTimeString);
+    if (dateTimeString == "") return null;
+    
+    var [day, month] = dateTimeString.split('/').map(Number);
+
+    var date = new Date();
+    var currentYear = date.getFullYear();
+
+    date.setUTCFullYear(currentYear);
+    date.setUTCMonth(month - 1);
+    date.setUTCDate(day);
+
+    return date;
 }

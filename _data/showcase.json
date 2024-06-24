@@ -1,0 +1,9 @@
+[
+    { "date": "1/7", "stage": "Qualifiers"},
+    { "date": "8/7", "stage": "Round of 32"},
+    { "date": "15/7", "stage": "Round of 16"},
+    { "date": "22/7", "stage": "Quarterfinals"},
+    { "date": "29/7", "stage": "Semifinals"},
+    { "date": "5/8", "stage": "Finals"},
+    { "date": "12/8", "stage": "Grand Finals"}
+]
