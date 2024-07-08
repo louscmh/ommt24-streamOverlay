@@ -85,6 +85,8 @@ async function updateDetails(data) {
     let file = data.menu.bm.path.file;
     let pick;
 
+    console.log(file);
+
     // CHECKER FOR MAPPICK
     if (beatmaps.includes(id)) {
         pick = beatmapSet.find(beatmap => beatmap["beatmapId"] === id)["pick"];
