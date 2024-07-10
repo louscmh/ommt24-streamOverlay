@@ -45,6 +45,8 @@ let api;
 // HTML VARS /////////////////////////////////////////////////////////////////
 let playerOne = document.getElementById("playerOneName");
 let playerTwo = document.getElementById("playerTwoName");
+let playerOneSeed = document.getElementById("playerOneSeed");
+let playerTwoSeed = document.getElementById("playerTwoSeed");
 
 let scoreBlue = document.getElementById("scoreBlue");
 let scoreRed = document.getElementById("scoreRed");
@@ -53,6 +55,11 @@ let chatContainer = document.getElementById("chatContainer");
 
 let playerOnePick = document.getElementById("playerOnePick");
 let playerTwoPick = document.getElementById("playerTwoPick");
+
+let sceneButton = document.getElementById("sceneButton");
+let turnButton = document.getElementById("turnButton");
+
+let sceneContainer = document.getElementById("main");
 
 // PLACEHOLDER VARS /////////////////////////////////////////////////////////////////
 let currentFile = "";
@@ -65,7 +72,45 @@ let scoreEvent;
 let previousState;
 let hasSetup;
 let chatLen = 0;
+let currentScene = 0;
+let banCount = 0;
+let currentBeatmap;
+let currentTurn;
+let pickedOnce = false;
 const beatmaps = new Set(); // Store beatmapID;
+const bms = []; // Store beatmaps
+
+// BEATMAP DATA /////////////////////////////////////////////////////////////////
+let beatmapSet = [];
+let beatmapIDS = [];
+(async () => {
+    try {
+        const jsonData = await $.getJSON("../_data/beatmaps.json");
+        jsonData.map((beatmap) => {
+            beatmapSet.push(beatmap);
+        });
+    } catch (error) {
+        console.error("Could not read JSON file", error);
+    }
+    for (index = 0; index < beatmapSet.length; index++) {
+        beatmapIDS.push(beatmapSet[index]["beatmapId"]);
+    }
+})();
+console.log(beatmapSet);
+
+// SEED DATA /////////////////////////////////////////////////////////////////
+let seeds = [];
+(async () => {
+    try {
+        const jsonData = await $.getJSON("../_data/seeds.json");
+        jsonData.map((seed) => {
+            seeds.push(seed);
+        });
+    } catch (error) {
+        console.error("Could not read JSON file", error);
+    }
+})();
+console.log(seeds);
 
 const mods = {
     RC: 0,
@@ -76,11 +121,46 @@ const mods = {
     TB: 5,
 };
 
+
+// CONTROL PANELS //////////
+sceneButton.addEventListener("click", function(event) {
+    if (currentScene == 0) {
+        currentScene = 1;
+        sceneButton.innerHTML = "CURRENT SCENE: GAMEPLAY";
+        sceneButton.style.backgroundColor = "blue";
+        sceneContainer.style.height = "149px";
+    } else {
+        currentScene = 0;
+        sceneButton.innerHTML = "CURRENT SCENE: MAPPOOL";
+        sceneButton.style.backgroundColor = "red";
+        sceneContainer.style.height = "1080px";
+    }
+})
+
+turnButton.addEventListener("click", function(event) {
+    if (currentTurn == 0 && banCount == 2) {
+        currentTurn = 1;
+        turnButton.innerHTML = "CURRENTLY PICKING: TEAM 2";
+        turnButton.style.backgroundColor = "rgb(105, 80, 54)";
+        turnButton.style.color = "white";
+    } else if (currentTurn == 1 && banCount == 2) {
+        currentTurn = 0;
+        turnButton.innerHTML = "CURRENTLY PICKING: TEAM 1";
+        turnButton.style.backgroundColor = "rgb(103, 54, 105)";
+        turnButton.style.color = "white";
+    } else {
+        turnButton.innerHTML = "TURN NOT AVAILABLE: BAN 2 MAPS FIRST";
+        turnButton.style.backgroundColor = "rgb(49, 41, 33)";
+        turnButton.style.color = "rgba(255, 255, 255, 0.473)";
+    }
+})
+
 class Beatmap {
     constructor(mods, beatmapID, layerName) {
         this.mods = mods;
         this.beatmapID = beatmapID;
         this.layerName = layerName;
+        this.isBan = false;
     }
     generate() {
         let mappoolContainer = document.getElementById(`${this.mods}`);
@@ -147,18 +227,32 @@ let team1 = "Red",
 socket.onmessage = event => {
     let data = JSON.parse(event.data);
 
+    let beatmapID = data.menu.bm.id;
+    console.log(banCount);
+    if (currentBeatmap != beatmapID && banCount == 2 && pickedOnce) {
+        console.log("happened");
+        currentBeatmap = beatmapID;
+        updateDetails(beatmapID);
+    }
+
     tempLeft = data.tourney.manager.teamName.left;
     tempRight = data.tourney.manager.teamName.right;
     // Player Names
     if (tempLeft != playerOne.innerHTML && tempLeft != "") {
-        playerOne.innerHTML = tempLeft;
-        // adjustFont(playerOne,340,60);
-        // setPlayerDetails(playerOnePic, tempLeft);
+        setTimeout(function(event) {
+            playerOne.innerHTML = tempLeft;
+            seeds.find(seed => seed["Team"] == tempLeft)["Seed"] > 0 ? 
+                playerOneSeed.innerHTML = `Seed ${seeds.find(seed => seed["Team"] === tempLeft)["Seed"]}` : 
+                    playerOneSeed.innerHTML = "Seed X";
+        }, 150);
     }
     if (tempRight != playerTwo.innerHTML && tempRight != "") {
-        playerTwo.innerHTML = tempRight;
-        // adjustFont(playerTwo,340,60);
-        // setPlayerDetails(playerTwoPic, tempRight);
+        setTimeout(function(event) {
+            playerTwo.innerHTML = tempRight;
+            seeds.find(seed => seed["Team"] === tempRight)["Seed"] > 0 ?
+                playerTwoSeed.innerHTML = `Seed ${seeds.find(seed => seed["Team"] === tempRight)["Seed"]}` : 
+                    playerTwoSeed.innerHTML = "Seed X";
+        }, 150);
     }
 
     if (previousState != data.tourney.manager.ipcState) {
@@ -257,6 +351,12 @@ async function checkState(ipcState) {
     // map has ended and its the next player's turn
     if (ipcState == 4) {
         stopPulse();
+        turnButton.click();
+        setTimeout(function () {
+            currentScene == 1 ? sceneButton.click() : null
+        }, 15000)
+    } else if (ipcState == 3) {
+        currentScene == 0 ? sceneButton.click() : null;
     }
 }
 
@@ -272,7 +372,6 @@ async function setupBeatmaps() {
         TB: 0,
     };
 
-    const bms = [];
     try {
         const jsonData = await $.getJSON("../_data/beatmaps.json");
         jsonData.map((beatmap) => {
@@ -299,126 +398,137 @@ async function setupBeatmaps() {
         }
         const bm = new Beatmap(beatmap.pick.substring(0,2), beatmap.beatmapId, `map${index}`);
         bm.generate();
-        bm.clicker.addEventListener("mousedown", function() {
-            bm.clicker.addEventListener("click", function(event) {
-                if (event.shiftKey) {
-                    bm.pickedStatus.style.color = "#b285c9";
-                    bm.pickedStatus.style.backgroundColor = "rgba(0, 0, 0, 0)";
-                    bm.pickedStatus.style.top = "0px";
-                    // bm.pickedStatus.style.left = "0px";
-                    bm.pickedStatus.style.right = "0px";
-                    bm.pickedStatus.style.width = "430px";
-                    bm.pickedStatus.style.height = "60px";
-                    bm.pickedStatus.style.lineHeight = "65px";
-                    bm.pickedStatus.style.fontSize = "25px";
-                    bm.overlay.style.zIndex = 3;
-                    bm.overlay.style.opacity = "0.8";
-                    // bm.pickedStatus.style.textShadow = "0 0 10px black";
-                    setTimeout(function() {
-                        bm.pickedStatus.style.opacity = "1";
-                        bm.pickedStatus.innerHTML = `Banned by T1`;
-                    }, 150);
-                } else if (event.ctrlKey) {
-                    bm.pickedStatus.style.right = "50px";
-                    bm.overlay.style.opacity = "0";
-                    bm.metadata.style.opacity = "1";
-                    bm.difficulty.style.opacity = "1";
-                    bm.overlay.style.zIndex = 0;
-                    // bm.pickedStatus.style.left = "100px";
-                    bm.pickedStatus.style.opacity = "0";
-                    bm.pickedStatus.style.backgroundColor = "rgba(0,0,0,0)";
-                    stopPulse();
-                    setTimeout(function() {
-                        playerOnePick.style.opacity = "0";
-                        playerTwoPick.style.opacity = "0";
-                        bm.pickedStatus.style.opacity = "1";
-                        bm.pickedStatus.innerHTML = "";
-                    }, 150);
-                } else {
-                    bm.pickedStatus.style.right = "20px";
-                    bm.pickedStatus.style.color = "#fff";
-                    bm.pickedStatus.style.backgroundColor = "#b285c9";
-                    bm.pickedStatus.style.top = "35px";
-                    // bm.pickedStatus.style.left = "0px";
-                    bm.pickedStatus.style.width = "100px";
-                    bm.pickedStatus.style.height = "20px";
-                    bm.pickedStatus.style.lineHeight = "25px";
-                    bm.pickedStatus.style.fontSize = "13px";
-                    bm.overlay.style.zIndex = 0;
-                    bm.overlay.style.opacity = "0";
-                    // bm.pickedStatus.style.textShadow = "0 0 0 rgba(0,0,0,0)";
-                    stopPulse();
-                    setTimeout(function() {
-                        playerOnePick.style.opacity = "1";
-                        playerTwoPick.style.opacity = "0";
-                        bm.pickedStatus.style.opacity = "1";
-                        bm.pickedStatus.innerHTML = "T1 PICK";
-                        bm.currentPick.style.opacity = "1";
-                        bm.mods != "MD" ? bm.clicker.style.animation = "pick 2s infinite" : bm.clicker.style.animation = "pulsepick 2s infinite";
-                    }, 150);
-                }
-            });
-            bm.clicker.addEventListener("contextmenu", function(event) {
-                if (event.shiftKey) {
-                    bm.pickedStatus.style.color = "#b285c9";
-                    bm.pickedStatus.style.backgroundColor = "rgba(0, 0, 0, 0)";
-                    bm.pickedStatus.style.top = "0px";
-                    // bm.pickedStatus.style.left = "0px";
-                    bm.pickedStatus.style.right = "0px";
-                    bm.pickedStatus.style.width = "430px";
-                    bm.pickedStatus.style.height = "60px";
-                    bm.pickedStatus.style.lineHeight = "65px";
-                    bm.pickedStatus.style.fontSize = "25px";
-                    bm.overlay.style.zIndex = 3;
-                    bm.overlay.style.opacity = "0.8";
-                    // bm.pickedStatus.style.textShadow = "0 0 10px black";
-                    setTimeout(function() {
-                        bm.pickedStatus.style.opacity = "1";
-                        bm.pickedStatus.innerHTML = `Banned by T2`;
-                    }, 150);
-                } else if (event.ctrlKey) {
-                    bm.pickedStatus.style.right = "50px";
-                    bm.overlay.style.opacity = "0";
-                    bm.metadata.style.opacity = "1";
-                    bm.difficulty.style.opacity = "1";
-                    bm.stats.style.opacity = "1";
-                    bm.bg.style.opacity = "1";
-                    bm.overlay.style.zIndex = 0;
-                    // bm.pickedStatus.style.left = "100px";
-                    bm.pickedStatus.style.opacity = "0";
-                    bm.pickedStatus.style.backgroundColor = "rgba(0,0,0,0)";
-                    stopPulse();
-                    setTimeout(function() {
-                        playerOnePick.style.opacity = "0";
-                        playerTwoPick.style.opacity = "0";
-                        bm.pickedStatus.style.opacity = "1";
-                        bm.pickedStatus.innerHTML = "";
-                    }, 150);
-                } else {
-                    bm.pickedStatus.style.right = "20px";
-                    bm.pickedStatus.style.color = "#fff";
-                    bm.pickedStatus.style.backgroundColor = "#b285c9";
-                    bm.pickedStatus.style.top = "35px";
-                    // bm.pickedStatus.style.left = "0px";
-                    bm.pickedStatus.style.width = "100px";
-                    bm.pickedStatus.style.height = "20px";
-                    bm.pickedStatus.style.lineHeight = "25px";
-                    bm.pickedStatus.style.fontSize = "13px";
-                    bm.overlay.style.zIndex = 0;
-                    bm.overlay.style.opacity = "0";
-                    bm.bg.style.opacity = "1";
-                    // bm.pickedStatus.style.textShadow = "0 0 0 rgba(0,0,0,0)";
-                    stopPulse();
-                    setTimeout(function() {
-                        playerOnePick.style.opacity = "0";
-                        playerTwoPick.style.opacity = "1";
-                        bm.pickedStatus.style.opacity = "1";
-                        bm.pickedStatus.innerHTML = "T2 PICK";
-                        bm.currentPick.style.opacity = "1";
-                        bm.mods != "MD" ? bm.clicker.style.animation = "pick 2s infinite" : bm.clicker.style.animation = "pulsepick 2s infinite";
-                    }, 150);
-                }
-            });
+        bm.clicker.addEventListener("click", function(event) {
+            if (event.shiftKey) {
+                bm.pickedStatus.style.color = "#b285c9";
+                bm.pickedStatus.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                bm.pickedStatus.style.top = "0px";
+                bm.pickedStatus.style.right = "0px";
+                bm.pickedStatus.style.width = "430px";
+                bm.pickedStatus.style.height = "60px";
+                bm.pickedStatus.style.lineHeight = "65px";
+                bm.pickedStatus.style.fontSize = "25px";
+                bm.overlay.style.zIndex = 3;
+                bm.overlay.style.opacity = "0.8";
+                bm.isBan = true;
+                banCount++;
+                banCount == 2 ? currentTurn = 1 : null;
+                banCount == 2 ? turnButton.click() : null;
+                setTimeout(function() {
+                    bm.pickedStatus.style.opacity = "1";
+                    bm.pickedStatus.innerHTML = `Banned by T1`;
+                }, 150);
+            } else if (event.ctrlKey) {
+                bm.pickedStatus.style.right = "50px";
+                bm.overlay.style.opacity = "0";
+                bm.metadata.style.opacity = "1";
+                bm.difficulty.style.opacity = "1";
+                bm.overlay.style.zIndex = 0;
+                // bm.pickedStatus.style.left = "100px";
+                bm.pickedStatus.style.opacity = "0";
+                bm.pickedStatus.style.backgroundColor = "rgba(0,0,0,0)";
+                stopPulse();
+                bm.isBan == true ? banCount-- : null;
+                bm.isBan == true ? bm.isBan == false  : null;
+                banCount < 2 ? turnButton.click() : null;
+                setTimeout(function() {
+                    playerOnePick.style.opacity = "0";
+                    playerTwoPick.style.opacity = "0";
+                    bm.pickedStatus.style.opacity = "1";
+                    bm.pickedStatus.innerHTML = "";
+                }, 150);
+            } else {
+                bm.pickedStatus.style.right = "20px";
+                bm.pickedStatus.style.color = "#fff";
+                bm.pickedStatus.style.backgroundColor = "#b285c9";
+                bm.pickedStatus.style.top = "35px";
+                bm.pickedStatus.style.width = "100px";
+                bm.pickedStatus.style.height = "20px";
+                bm.pickedStatus.style.lineHeight = "25px";
+                bm.pickedStatus.style.fontSize = "13px";
+                bm.overlay.style.zIndex = 0;
+                bm.overlay.style.opacity = "0";
+                stopPulse();
+                bm.isBan == true ? banCount-- : null;
+                bm.isBan == true ? bm.isBan == false  : null;
+                banCount == 2 ? pickedOnce == true : null;
+                banCount < 2 ? turnButton.click() : null;
+                setTimeout(function() {
+                    playerOnePick.style.opacity = "1";
+                    playerTwoPick.style.opacity = "0";
+                    bm.pickedStatus.style.opacity = "1";
+                    bm.pickedStatus.innerHTML = "T1 PICK";
+                    bm.currentPick.style.opacity = "1";
+                    bm.mods != "MD" ? bm.clicker.style.animation = "pick 2s infinite" : bm.clicker.style.animation = "pulsepick 2s infinite";
+                }, 150);
+            }
+        });
+        bm.clicker.addEventListener("contextmenu", function(event) {
+            if (event.shiftKey) {
+                bm.pickedStatus.style.color = "#b285c9";
+                bm.pickedStatus.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                bm.pickedStatus.style.top = "0px";
+                bm.pickedStatus.style.right = "0px";
+                bm.pickedStatus.style.width = "430px";
+                bm.pickedStatus.style.height = "60px";
+                bm.pickedStatus.style.lineHeight = "65px";
+                bm.pickedStatus.style.fontSize = "25px";
+                bm.overlay.style.zIndex = 3;
+                bm.overlay.style.opacity = "0.8";
+                bm.isBan = true;
+                banCount++;
+                banCount == 2 ? currentTurn = 0 : null;
+                banCount == 2 ? turnButton.click() : null;
+                setTimeout(function() {
+                    bm.pickedStatus.style.opacity = "1";
+                    bm.pickedStatus.innerHTML = `Banned by T2`;
+                }, 150);
+            } else if (event.ctrlKey) {
+                bm.pickedStatus.style.right = "50px";
+                bm.overlay.style.opacity = "0";
+                bm.metadata.style.opacity = "1";
+                bm.difficulty.style.opacity = "1";
+                bm.stats.style.opacity = "1";
+                bm.bg.style.opacity = "1";
+                bm.overlay.style.zIndex = 0;
+                bm.pickedStatus.style.opacity = "0";
+                bm.pickedStatus.style.backgroundColor = "rgba(0,0,0,0)";
+                stopPulse();
+                bm.isBan == true ? banCount-- : null;
+                bm.isBan == true ? bm.isBan == false  : null;
+                banCount < 2 ? turnButton.click() : null;
+                setTimeout(function() {
+                    playerOnePick.style.opacity = "0";
+                    playerTwoPick.style.opacity = "0";
+                    bm.pickedStatus.style.opacity = "1";
+                    bm.pickedStatus.innerHTML = "";
+                }, 150);
+            } else {
+                bm.pickedStatus.style.right = "20px";
+                bm.pickedStatus.style.color = "#fff";
+                bm.pickedStatus.style.backgroundColor = "#b285c9";
+                bm.pickedStatus.style.top = "35px";
+                bm.pickedStatus.style.width = "100px";
+                bm.pickedStatus.style.height = "20px";
+                bm.pickedStatus.style.lineHeight = "25px";
+                bm.pickedStatus.style.fontSize = "13px";
+                bm.overlay.style.zIndex = 0;
+                bm.overlay.style.opacity = "0";
+                bm.bg.style.opacity = "1";
+                stopPulse();
+                bm.isBan == true ? banCount-- : null;
+                bm.isBan == true ? bm.isBan == false  : null;
+                banCount == 2 ? pickedOnce == true : null;
+                banCount < 2 ? turnButton.click() : null;
+                setTimeout(function() {
+                    playerOnePick.style.opacity = "0";
+                    playerTwoPick.style.opacity = "1";
+                    bm.pickedStatus.style.opacity = "1";
+                    bm.pickedStatus.innerHTML = "T2 PICK";
+                    bm.currentPick.style.opacity = "1";
+                    bm.mods != "MD" ? bm.clicker.style.animation = "pick 2s infinite" : bm.clicker.style.animation = "pulsepick 2s infinite";
+                }, 150);
+            }
         });
         const mapData = await getDataSet(beatmap.beatmapId);
         bm.map.style.backgroundImage = `url('../_shared_assets/design/mappick.png')`;
@@ -557,3 +667,29 @@ function updateChat(data) {
     // Update the scroll so it's sticks at the bottom by default
     chats.scrollTop = chats.scrollHeight;
 }
+
+async function updateDetails(beatmapID) {
+    if (beatmapIDS.includes(beatmapID)) {
+        for (let bm of beatmaps) {
+            if (bm.beatmapID == beatmapID) {
+                setTimeout(() => {
+                    currentTurn == 0 ? bm.clicker.dispatchEvent(leftClick) : bm.clicker.dispatchEvent(rightClick);
+                }, 100);
+            }
+        }
+    }
+}
+
+var rightClick = new MouseEvent('contextmenu', {
+    bubbles: true,
+    cancelable: true,
+    view: window,
+    button: 2, // Indicates a right-click
+    buttons: 2 // Indicates the right mouse button is pressed
+});
+
+var leftClick = new MouseEvent('click', {
+    bubbles: true,
+    cancelable: true,
+    view: window
+});

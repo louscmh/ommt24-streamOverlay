@@ -10,43 +10,51 @@
 </head>
 
 <body>
-	<div id="main">
-    <div id="stageText"></div>
-		<div id="top">
-      <div id="playerDetails">
-        <div id="playerOne">
-          <div id="playerOneDetails">
-            <div id="playerOneName">*insert very long team name*</div>
-            <div id="scoreRowOne">
-              <div id="scoreBlue"></div>
-              <div id="playerOnePick">Pick</div>
+  <div id="main">
+    <div id="container">
+      <div id="stageText"></div>
+      <div id="top">
+        <div id="playerDetails">
+          <div id="playerOne">
+            <div id="playerOneDetails">
+              <div id="playerOneName">*insert very long team name*</div>
+              <div id="playerOneSeed">Seed X</div>
+              <div id="scoreRowOne">
+                <div id="scoreBlue"></div>
+                <div id="playerOnePick">Pick</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div id="playerTwo">
-          <div id="playerTwoDetails">
-            <div id="playerTwoName">*insert very long team name*</div>
-            <div id="scoreRowTwo">
-              <div id="scoreRed"></div>
-              <div id="playerTwoPick">Pick</div>
+          <div id="playerTwo">
+            <div id="playerTwoDetails">
+              <div id="playerTwoName">*insert very long team name*</div>
+              <div id="playerTwoSeed">Seed X</div>
+              <div id="scoreRowTwo">
+                <div id="scoreRed"></div>
+                <div id="playerTwoPick">Pick</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div id="mappoolContainer">
+        <div id="RC" class="mapContainer"></div>
+        <div id="LN" class="mapContainer"></div>
+        <div id="HB" class="mapContainer"></div>
+        <div id="SV" class="mapContainer"></div>
+        <div id="MD" class="mapContainer"></div>
+        <div id="TB" class="mapContainer"></div>
+      </div>
+      <div id="chatContainer">
+        <div id="chats"></div>
+      </div>
     </div>
-    <div id="mappoolContainer">
-      <div id="RC" class="mapContainer"></div>
-      <div id="LN" class="mapContainer"></div>
-      <div id="HB" class="mapContainer"></div>
-      <div id="SV" class="mapContainer"></div>
-      <div id="MD" class="mapContainer"></div>
-      <div id="TB" class="mapContainer"></div>
-    </div>
-    <div id="chatContainer">
-      <div id="chats"></div>
-    </div>
-	</div>
-  <img src="../_shared_assets/design/mappool.png" id="foreground">
+    <img src="../_shared_assets/design/mappool.png" id="foreground">
+  </div>
+  <div id="controlPanel">
+    <div id="sceneButton">CURRENT SCENE: MAPPOOL</div>
+    <div id="turnButton">TURN NOT AVAILABLE: BAN 2 MAPS FIRST</div>
+  </div>
 	<script src="index.js"></script>
   </body>
   

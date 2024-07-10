@@ -22,7 +22,64 @@
     top:0px;
 }
 
+#controlPanel {
+    width:1920px;
+    height:200px;
+    z-index:0;
+    position:absolute;
+    left:0px;
+    top:1085px;
+    display:flex;
+    align-items: center;
+    font-size: 30px;
+    font-family: "Neue-Regrade-Bold-Italic";
+    font-weight: normal;
+    color: #f0cdba;
+    background-color: grey;
+}
+
+#sceneButton {
+    background:red;
+    color:white;
+    width:400px;
+    height:175px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-inline: 25px;
+    transition: 250ms ease-in-out;
+}
+
+#turnButton {
+    background:rgb(49, 41, 33);
+    color:rgba(255, 255, 255, 0.473);
+    width:400px;
+    height:175px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-inline: 25px;
+    transition: 250ms ease-in-out;
+}
+
 #main {
+    width:1920px;
+    height:1080px;
+    z-index:0;
+    position:absolute;
+    left:0px;
+    top:0px;
+    overflow:hidden;
+    transition: 1000ms ease-in-out;
+    border: 0 0 5px 0 solid #f0cdba;
+    /* box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box; */
+}
+
+#container {
     width:1920px;
     height:1080px;
     z-index:0;
@@ -56,6 +113,7 @@
 }
 
 #playerOneDetails, #playerTwoDetails {
+    margin-top:10px;
     margin-inline: 47px;
     display: flex;
     flex-direction: column;
@@ -293,7 +351,7 @@
     width: 430px;
     height: 60px;
     transition: ease-in-out 300ms;
-    margin-block:5px;
+    margin-block:7px;
     margin-inline:20px;
     border-radius:50px;
 }
@@ -455,4 +513,10 @@
     transition: 250ms ease-in-out;
     opacity: 0;
     z-index:0;
+}
+
+#playerOneSeed, #playerTwoSeed {
+    font-family: "Neue-Regrade-Regular-Italic";
+    font-size: 24px;
+    margin-block: -2px;
 }

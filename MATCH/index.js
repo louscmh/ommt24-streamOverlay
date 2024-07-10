@@ -70,13 +70,13 @@ let rightContent = document.getElementById("rightContent");
 let winLeft = document.getElementById("winLeft");
 let winRight = document.getElementById("winRight");
 
-let playerOne = document.getElementById("playerOneName");
-let playerTwo = document.getElementById("playerTwoName");
+// let playerOne = document.getElementById("playerOneName");
+// let playerTwo = document.getElementById("playerTwoName");
 
 // PLACEHOLDER VARS /////////////////////////////////////////////////////////////////
 let currentFile = "";
 let gameState;
-let currentStage;
+// let currentStage;
 let bestOfTemp;
 let scoreBlueTemp;
 let scoreRedTemp;
@@ -102,9 +102,6 @@ let animationScore = {
 socket.onmessage = event => {
     let data = JSON.parse(event.data);
 
-    tempLeft = data.tourney.manager.teamName.left;
-    tempRight = data.tourney.manager.teamName.right;
-
     let file = data.menu.bm.path.file;
     if (currentFile != file) {
         updateDetails(data);
@@ -115,101 +112,9 @@ socket.onmessage = event => {
         previousState = data.tourney.manager.ipcState;
     }
 
-    // Player Names
-    if (tempLeft != playerOne.innerHTML && tempLeft != "") {
-        playerOne.innerHTML = tempLeft;
-        // adjustFont(playerOne,340,60);
-        // setPlayerDetails(playerOnePic, tempLeft);
-    }
-    if (tempRight != playerTwo.innerHTML && tempRight != "") {
-        playerTwo.innerHTML = tempRight;
-        // adjustFont(playerTwo,340,60);
-        // setPlayerDetails(playerTwoPic, tempRight);
-    }
-
-    if (currentStage != getCurrentStage()) {
-        currentStage = getCurrentStage()
-        stageText.innerHTML = currentStage;
-    }
-
     if (data.tourney.manager.bools.scoreVisible) {
         updateScore(data.tourney.manager.gameplay.score.left, data.tourney.manager.gameplay.score.right);
     }
-
-    if (bestOfTemp !== Math.ceil(data.tourney.manager.bestOF / 2) || scoreBlueTemp !== data.tourney.manager.stars.left || scoreRedTemp !== data.tourney.manager.stars.right) {
-
-		// Courtesy of Victim-Crasher
-		bestOfTemp = Math.ceil(data.tourney.manager.bestOF / 2);
-
-		// To know where to blow or pop score
-		if (scoreBlueTemp < data.tourney.manager.stars.left) {
-			scoreEvent = "blue-add";
-		} else if (scoreBlueTemp > data.tourney.manager.stars.left) {
-			scoreEvent = "blue-remove";
-		} else if (scoreRedTemp < data.tourney.manager.stars.right) {
-			scoreEvent = "red-add";
-		} else if (scoreRedTemp > data.tourney.manager.stars.right) {
-			scoreEvent = "red-remove";
-		}
-
-		scoreBlueTemp = data.tourney.manager.stars.left;
-		scoreBlue.innerHTML = "";
-		for (var i = 0; i < scoreBlueTemp; i++) {
-			if (scoreEvent === "blue-add" && i === scoreBlueTemp - 1) {
-				let scoreFill = document.createElement("div");
-				scoreFill.setAttribute("class", "score");
-                scoreFill.style.backgroundImage = `url("../_shared_assets/design/point_full.png")`;
-				scoreBlue.appendChild(scoreFill);
-			} else {
-				let scoreFill = document.createElement("div");
-				scoreFill.setAttribute("class", "score");
-                scoreFill.style.backgroundImage = `url("../_shared_assets/design/point_full.png")`;
-				scoreBlue.appendChild(scoreFill);
-			}
-		}
-		for (var i = 0; i < bestOfTemp - scoreBlueTemp; i++) {
-			if (scoreEvent === "blue-remove" && i === 0) {
-				let scoreNone = document.createElement("div");
-				scoreNone.setAttribute("class", "score");
-                scoreNone.style.backgroundImage = `url("../_shared_assets/design/point_empty.png")`;
-				scoreBlue.appendChild(scoreNone);
-			} else {
-				let scoreNone = document.createElement("div");
-				scoreNone.setAttribute("class", "score");
-                scoreNone.style.backgroundImage = `url("../_shared_assets/design/point_empty.png")`;
-				scoreBlue.appendChild(scoreNone);
-			}
-		}
-
-		scoreRedTemp = data.tourney.manager.stars.right;
-		scoreRed.innerHTML = "";
-		for (var i = 0; i < bestOfTemp - scoreRedTemp; i++) {
-			if (scoreEvent === "red-remove" && i === bestOfTemp - scoreRedTemp - 1) {
-				let scoreNone = document.createElement("div");
-				scoreNone.setAttribute("class", "score");
-                scoreNone.style.backgroundImage = `url("../_shared_assets/design/point_empty.png")`;
-				scoreRed.appendChild(scoreNone);
-			} else {
-				let scoreNone = document.createElement("div");
-				scoreNone.setAttribute("class", "score");
-                scoreNone.style.backgroundImage = `url("../_shared_assets/design/point_empty.png")`;
-				scoreRed.appendChild(scoreNone);
-			}
-		}
-		for (var i = 0; i < scoreRedTemp; i++) {
-			if (scoreEvent === "red-add" && i === 0) {
-				let scoreFill = document.createElement("div");
-				scoreFill.setAttribute("class", "score");
-                scoreFill.style.backgroundImage = `url("../_shared_assets/design/point_full.png")`;
-				scoreRed.appendChild(scoreFill);
-			} else {
-				let scoreFill = document.createElement("div");
-				scoreFill.setAttribute("class", "score");
-                scoreFill.style.backgroundImage = `url("../_shared_assets/design/point_full.png")`;
-				scoreRed.appendChild(scoreFill);
-			}
-		}
-	}
 }
 
 async function updateDetails(data) {
@@ -296,42 +201,6 @@ const parseTime = ms => {
 	const second = Math.floor(ms / 1000) % 60 + '';
 	const minute = Math.floor(ms / 1000 / 60) + '';
 	return `${'0'.repeat(2 - minute.length) + minute}:${'0'.repeat(2 - second.length) + second}`;
-}
-
-function getCurrentStage() {
-    var date = new Date();
-    var day = date.getUTCDate();
-    var month = date.getUTCMonth()+1;
-
-    // console.log(`${day}, ${month}`);
-
-    let currentStage;
-
-    for (let stage of dates) {
-        stageDate = parseDateTime(stage["date"]);
-        // console.log(`${stageDate.getUTCDate()}, ${stageDate.getUTCMonth()}`);
-        if (stageDate.getUTCDate() >= day && stageDate.getUTCMonth()+1 >= month) {
-            return currentStage["stage"];
-        }
-        currentStage = stage;
-    }
-    return "No Stage Detected";
-}
-
-function parseDateTime(dateTimeString) {
-    // console.log(dateTimeString);
-    if (dateTimeString == "") return null;
-    
-    var [day, month] = dateTimeString.split('/').map(Number);
-
-    var date = new Date();
-    var currentYear = date.getFullYear();
-
-    date.setUTCFullYear(currentYear);
-    date.setUTCMonth(month - 1);
-    date.setUTCDate(day);
-
-    return date;
 }
 
 async function makeScrollingText(title, titleDelay, rate, boundaryWidth, padding) {
