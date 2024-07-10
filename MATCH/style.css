@@ -1,0 +1,320 @@
+@font-face {
+    font-family: "Macherie";
+    src: url("../_shared_assets/fonts/macherie.otf");
+}
+
+@font-face {
+    font-family: "Neue-Regrade-Bold-Italic";
+    src: url("../_shared_assets/fonts/NeueRegradeBoldItalic.otf");
+}
+
+@font-face {
+    font-family: "Neue-Regrade-Regular-Italic";
+    src: url("../_shared_assets/fonts/NeueRegradeRegularItalic.otf");
+}
+
+#foreground {
+    width:1920px;
+    height:1080px;
+    z-index:-1;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+
+#main {
+    width:1920px;
+    height:1080px;
+    z-index:0;
+    position:absolute;
+    left:0px;
+    top:0px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    
+	/* text-shadow: 0px 0px 8px black; */
+    font-size: 30px;
+    font-family: "Neue-Regrade-Bold-Italic";
+    font-weight: normal;
+    color: #f0cdba;
+}
+
+#stageText {
+    font-family: "Neue-Regrade-Regular-Italic";
+    font-weight: normal;
+    color: #f0cdba;
+    margin-top:89px;
+}
+
+#beatmapDetails {
+    position:absolute;
+    bottom: 25px;
+    left:45px;
+    width:1290px;
+    display:flex;
+    flex-direction: column;
+}
+
+#statRowOne {
+    display:flex;
+    align-items: center;
+}
+
+#pickID {
+    font-family: "Macherie";
+    font-weight: "Semi Bold";
+    color: #f0cdba;
+    font-size:80px;
+    margin-bottom:-10px;
+    width:200px;
+}
+
+#songDetails {
+    width:620px;
+    overflow:hidden;
+    white-space: nowrap;
+    display:flex;
+    flex-direction: column;
+}
+
+#songName {
+    font-family: "Neue-Regrade-Bold-Italic";
+    font-size:24px;
+    width:fit-content;
+    white-space: nowrap;
+}
+
+#songDelay {
+    font-family: "Neue-Regrade-Bold-Italic";
+    font-size:24px;
+    width:fit-content;
+    white-space: nowrap;
+    display:none;
+}
+
+#artistName {
+    font-family: "Neue-Regrade-Regular-Italic";
+    font-size:24px;
+    width:fit-content;
+    white-space: nowrap;
+}
+
+#artistDelay {
+    font-family: "Neue-Regrade-Regular-Italic";
+    font-size:24px;
+    width:fit-content;
+    white-space: nowrap;
+    display:none;
+}
+
+#statDetails {
+    display:flex;
+    flex-direction: column;
+}
+
+#rowOne, #rowTwo {
+    display:flex;
+    font-size:18px;
+}
+
+.statText {
+    font-family: "Neue-Regrade-Regular-Italic";
+    margin-right:18px;
+}
+
+.staticStatText {
+    margin-right:4px;
+}
+
+#top {
+    position: absolute;
+    width:1920px;
+    height:149px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#playerDetails {
+    width: inherit;
+    display:flex;
+    justify-content: space-between;
+}
+
+#playerOneDetails, #playerTwoDetails {
+    margin-inline: 47px;
+    display: flex;
+    flex-direction: column;
+}
+
+#playerTwoDetails {
+    align-items: end;
+
+}
+
+/* SCORE RELATED STUFF */
+
+.point {
+    width:94%;
+}
+
+#scoreBlue {
+	display: flex;
+    align-items: center;
+	height: inherit;
+    margin-top: 5px;
+    margin-left:2px;
+    margin-bottom:5px;
+}
+#scoreRed {
+	display: flex;
+    justify-content: end;
+    align-items: center;
+	height: inherit;
+    margin-top: 5px;
+    margin-right:2px;
+    margin-bottom:5px;
+}
+
+#scoreBlue>.score {
+	width: 33px;
+    height:37px;
+    border-radius: 5px;
+	margin-right:5px;
+    background-image: url("../_shared_assets/design/point_empty.png");
+}
+
+#scoreRed>.score {
+	width: 33px;
+    height:37px;
+    border-radius: 5px;
+	margin-left:5px;
+    background-image: url("../_shared_assets/design/point_empty.png");
+}
+
+/* score */
+#score {
+    position:absolute;
+    top:874px;
+    width:1920px;
+    height:fit-content;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 250ms ease-in-out;
+}
+
+#scoreBar {
+    width:1420px;
+    display:flex;
+    justify-content: center;
+}
+
+#scoreBarLeft, #scoreBarRight {
+    width:710px;
+    height:20px;
+}
+
+#scoreBarLeft {
+    display:flex;
+    flex-direction: row-reverse;
+}
+
+#leftContent {
+    width:inherit;
+    height:20px;
+    background-color: #f0cdba;
+    border-radius: 20px 0px 0px 20px;
+    transition: ease-in-out 500ms;
+}
+
+#rightContent {
+    width:inherit;
+    height:20px;
+    background-color: #f0cdba;
+    border-radius: 0px 20px 20px 0px;
+    transition: ease-in-out 500ms;
+}
+
+#scoreDifference {
+    margin-top:8px;
+    font-family: "Neue-Regrade-Regular-Italic";
+    font-size:16px;
+    text-align: center;
+    display:flex;
+    width:1000px;
+    justify-content: center;
+}
+
+#diffLeft {
+    position: absolute;
+    width:710px;
+    text-align:center;
+}
+
+#diffRight {
+    position: absolute;
+    width:710px;
+    text-align:center;
+}
+
+#diffText {
+    margin-top:18px;
+    font-family: "Neue-Regrade-Regular-Italic";
+    font-size:16px;
+}
+
+#playerScore {
+    position:absolute;
+    top:20px;
+    width: 950px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#win {
+    position:absolute;
+    display:flex;
+    justify-content: center;
+    top:28px;
+    font-size:36px;
+}
+
+#winLeft, #winRight {
+    color: #f0cdba;
+    font-family: "Macherie";
+    border-radius: 20px;
+    padding-inline:15px;
+    padding-block:4px;
+    margin-inline:300px;
+    transition: 500ms ease-in-out;
+}
+
+#playerOneScore , #playerTwoScore {
+    width: 350px;
+    font-size:48px;
+    font-family: "Neue-Regrade-Bold-Italic";
+}
+
+#playerOneScore {
+    text-align: right;
+    margin-right:50px;
+}
+
+#playerTwoScore {
+    text-align: left;
+    margin-left:50px;
+}
+
+@keyframes scrollText {
+	0% {
+	  transform: translateX(100%);
+	}
+	100% {
+	  transform: translateX(-100%);
+	}
+}

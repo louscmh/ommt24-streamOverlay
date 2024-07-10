@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../_shared_assets/deps/reconnecting-websocket.min.js"></script>
+</head>
+
+<body>
+	<div id="main">
+    <div id="stageText"></div>
+    <div id="beatmapDetails">
+      <div id="pickID">XX1</div>
+      <div id="songDetails">
+        <div id="songName">*insert very long song name here*</div>
+        <div id="songDelay"></div>
+        <div id="artistName">*insert very long artist name here*</div>
+        <div id="artistDelay"></div>
+      </div>
+      <div id="statDetails">
+        <div id="rowOne">
+          <div class="staticStatText">BPM</div>
+          <div id="mapBPM" class="statText">xxx - xxxxx</div>
+          <div class="staticStatText">SR</div>
+          <div id="mapSR" class="statText">7.27</div>
+          <div class="staticStatText">OD</div>
+          <div id="mapOD" class="statText">7.27</div>
+          <div class="staticStatText">LEN</div>
+          <div id="mapLength" class="statText">7:27</div>
+        </div>
+        <div id="rowTwo">
+          <div class="staticStatText">Mapper</div>
+          <div id="mapperName" class="statText">*insert mapper here*</div>
+        </div>
+      </div>
+    </div>
+	</div>
+  <img src="../_shared_assets/design/winner.png" id="foreground">
+	<script src="index.js"></script>
+  </body>
+  
+  </html>
