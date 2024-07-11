@@ -64,6 +64,19 @@
     transition: 250ms ease-in-out;
 }
 
+#autoButton {
+    background:#007A14;
+    color:white;
+    width:400px;
+    height:175px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-inline: 25px;
+    transition: 250ms ease-in-out;
+}
+
 #main {
     width:1920px;
     height:1080px;
@@ -230,9 +243,17 @@
     transition: ease-in-out 200ms;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
     z-index:2;
     font-family: "Neue-Regrade-Bold-Italic";
+}
+
+.title {
+    width:fit-content;
+}
+
+.titleDelay {
+    position:absolute;
+    width:fit-content;
 }
 
 .mapInfoStat {
@@ -519,4 +540,12 @@
     font-family: "Neue-Regrade-Regular-Italic";
     font-size: 24px;
     margin-block: -2px;
+}
+
+#pickingText {
+    opacity: 0;
+    font-family: "Neue-Regrade-Regular-Italic";
+    font-size: 24px;
+    transition: 500ms ease-in-out;
+    transform: scale(0);
 }
