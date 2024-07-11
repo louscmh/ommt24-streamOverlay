@@ -271,10 +271,10 @@ socket.onmessage = event => {
 
     let beatmapID = data.menu.bm.id;
     console.log(banCount);
-    if (currentBeatmap != beatmapID && banCount == 2 && autoPick) {
+    if (currentBeatmap != beatmapID) {
         console.log("happened");
         currentBeatmap = beatmapID;
-        updateDetails(beatmapID);
+        banCount == 2 && autoPick ? updateDetails(beatmapID) : null;
     }
 
     tempLeft = data.tourney.manager.teamName.left;
@@ -584,6 +584,8 @@ async function setupBeatmaps() {
                         bm.isBan == true ? bm.isBan == false  : null;
                         banCount < 2 ? turnButton.click() : null;
                         setTimeout(function() {
+                            pickingText.style.opacity = 0;
+                            pickingText.style.transform = "scale(0)";
                             playerOnePick.style.opacity = "0";
                             playerTwoPick.style.opacity = "0";
                             bm.currentPick.style.opacity = "1";

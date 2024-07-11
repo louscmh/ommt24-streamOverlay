@@ -87,7 +87,7 @@ let cachedPlayerTwoScore;
 let cachedDifference;
 let cachedComboOne;
 let cachedComboTwo;
-let barThreshold = 250000;
+let barThreshold = 150000;
 
 // FOR ANIMATION //////////////////////////////////////////////////
 let animationScore = {
