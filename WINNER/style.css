@@ -40,97 +40,26 @@
     color: #f0cdba;
 }
 
+#teamName {
+    font-family:"Macherie";
+    font-size:100px;
+    position:absolute;
+    top:560px;
+}
+
+#playerNames {
+    font-family:"Neue-Regrade-Regular-Italic";
+    font-size:36px;
+    position:absolute;
+    top:685px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #stageText {
     font-family: "Neue-Regrade-Regular-Italic";
     font-weight: normal;
     color: #f0cdba;
-    margin-top:110px;
-}
-
-#beatmapDetails {
-    position:absolute;
-    bottom: 0px;
-    width:1290px;
-    height:175px;
-    display:flex;
-    align-items: center;
-}
-
-#pickID {
-    font-family: "Macherie";
-    font-weight: "Semi Bold";
-    color: #f0cdba;
-    font-size:80px;
-    margin-bottom:-10px;
-    width:200px;
-}
-
-#songDetails {
-    width:620px;
-    overflow:hidden;
-    white-space: nowrap;
-    display:flex;
-    flex-direction: column;
-}
-
-#songName {
-    font-family: "Neue-Regrade-Bold-Italic";
-    font-size:24px;
-    width:fit-content;
-    white-space: nowrap;
-}
-
-#songDelay {
-    font-family: "Neue-Regrade-Bold-Italic";
-    font-size:24px;
-    width:fit-content;
-    white-space: nowrap;
-    display:none;
-}
-
-#artistName {
-    font-family: "Neue-Regrade-Regular-Italic";
-    font-size:24px;
-    width:fit-content;
-    white-space: nowrap;
-}
-
-#artistDelay {
-    font-family: "Neue-Regrade-Regular-Italic";
-    font-size:24px;
-    width:fit-content;
-    white-space: nowrap;
-    display:none;
-}
-
-#statDetails {
-    position:absolute;
-    right:0px;
-    display:flex;
-    flex-direction: column;
-    align-items: end;
-    text-align: end;
-}
-
-#rowOne, #rowTwo {
-    display:flex;
-    font-size:24px;
-}
-
-.statText {
-    font-family: "Neue-Regrade-Regular-Italic";
-    margin-left:5px;
-}
-
-.staticStatText {
-    margin-left:24px;
-}
-
-@keyframes scrollText {
-	0% {
-	  transform: translateX(100%);
-	}
-	100% {
-	  transform: translateX(-100%);
-	}
+    margin-top:430px;
 }

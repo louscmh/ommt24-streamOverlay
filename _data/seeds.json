@@ -1,130 +1,194 @@
 [
- {
-   "Team": "leon's waifuus!!",
-   "Seed": 1
- },
- {
-   "Team": "Gon and LongGone",
-   "Seed": 2
- },
- {
-   "Team": "Digital Frogs",
-   "Seed": 3
- },
- {
-   "Team": "Re:Zuna",
-   "Seed": 4
- },
- {
-   "Team": "Alpha Dan Virgins",
-   "Seed": 5
- },
- {
-   "Team": "i like cookie",
-   "Seed": 6
- },
- {
-   "Team": "Upscroll Gang",
-   "Seed": 7
- },
- {
-   "Team": "Canis Majoris: Sirius A and B",
-   "Seed": 8
- },
- {
-   "Team": "Epic Cat",
-   "Seed": 9
- },
- {
-   "Team": "Yo, What Team Name",
-   "Seed": 10
- },
- {
-   "Team": "osake",
-   "Seed": 11
- },
- {
-   "Team": "duck is bird",
-   "Seed": 12
- },
- {
-   "Team": "we love jacking",
-   "Seed": 13
- },
- {
-   "Team": "Dark System",
-   "Seed": 14
- },
- {
-   "Team": "Team ferrets",
-   "Seed": 15
- },
- {
-   "Team": "Rice Noodles",
-   "Seed": 16
- },
- {
-   "Team": "how to train your dragon",
-   "Seed": 17
- },
- {
-   "Team": "RealNoFake",
-   "Seed": 18
- },
- {
-   "Team": "Los Pollos Hermanos",
-   "Seed": 19
- },
- {
-   "Team": "kibitzfanboys",
-   "Seed": 20
- },
- {
-   "Team": "3 DollarKeyboard",
-   "Seed": 21
- },
- {
-   "Team": "Overjoyed",
-   "Seed": 22
- },
- {
-   "Team": "Tyto",
-   "Seed": 23
- },
- {
-   "Team": "Anthena",
-   "Seed": 24
- },
- {
-   "Team": "F",
-   "Seed": 25
- },
- {
-   "Team": "Tidur",
-   "Seed": 26
- },
- {
-   "Team": "Sleepless Duo",
-   "Seed": 27
- },
- {
-   "Team": "Almost disabled",
-   "Seed": 28
- },
- {
-   "Team": "Appley Leafy",
-   "Seed": 29
- },
- {
-   "Team": "Sengketa Blok Ambalat Incident || TPT",
-   "Seed": 30
- },
- {
-   "Team": "ImForcedToJoin",
-   "Seed": 31
- },
- {
-   "Team": "The 5 Digits",
-   "Seed": 32
- }
-]
+  {
+    "Team": "leon's waifuus!!",
+    "Seed": 1,
+    "playerOne": "JayLye",
+    "playerTwo": "konkawe"
+  },
+  {
+    "Team": "Gon and LongGone",
+    "Seed": 2,
+    "playerOne": "Tosai_",
+    "playerTwo": "yz1155"
+  },
+  {
+    "Team": "Digital Frogs",
+    "Seed": 3,
+    "playerOne": "[LS] -Koyume-",
+    "playerTwo": "Tonels"
+  },
+  {
+    "Team": "Re:Zuna",
+    "Seed": 4,
+    "playerOne": "ReJust",
+    "playerTwo": "Rxizuna"
+  },
+  {
+    "Team": "Alpha Dan Virgins",
+    "Seed": 5,
+    "playerOne": "YtAlbin0",
+    "playerTwo": "bagjettka"
+  },
+  {
+    "Team": "i like cookie",
+    "Seed": 6,
+    "playerOne": "[MY] VASD",
+    "playerTwo": "Fr05tyGD"
+  },
+  {
+    "Team": "Upscroll Gang",
+    "Seed": 7,
+    "playerOne": "CJPGaming",
+    "playerTwo": "-Nightkore"
+  },
+  {
+    "Team": "Canis Majoris: Sirius A and B",
+    "Seed": 8,
+    "playerOne": "Projiensux",
+    "playerTwo": "_Squiddy_"
+  },
+  {
+    "Team": "Epic Cat",
+    "Seed": 9,
+    "playerOne": "alexvonnn",
+    "playerTwo": "epic man 2"
+  },
+  {
+    "Team": "Yo, What Team Name",
+    "Seed": 10,
+    "playerOne": "RhythmBoii",
+    "playerTwo": "AstalFanBoy"
+  },
+  {
+    "Team": "osake",
+    "Seed": 11,
+    "playerOne": "Neokje",
+    "playerTwo": "rainlily"
+  },
+  {
+    "Team": "duck is bird",
+    "Seed": 12,
+    "playerOne": "OfficialDuckys",
+    "playerTwo": "Crimzenite"
+  },
+  {
+    "Team": "we love jacking",
+    "Seed": 13,
+    "playerOne": "[LS]qwk",
+    "playerTwo": "AGuyCalledJeff"
+  },
+  {
+    "Team": "Dark System",
+    "Seed": 14,
+    "playerOne": "BlindedMF",
+    "playerTwo": "Chicken Sammy"
+  },
+  {
+    "Team": "Team ferrets",
+    "Seed": 15,
+    "playerOne": "Drysilas",
+    "playerTwo": "nixii cant acc"
+  },
+  {
+    "Team": "Rice Noodles",
+    "Seed": 16,
+    "playerOne": "TengShiXun",
+    "playerTwo": "ERA trooperr"
+  },
+  {
+    "Team": "how to train your dragon",
+    "Seed": 17,
+    "playerOne": "Evirir",
+    "playerTwo": "Unitori-"
+  },
+  {
+    "Team": "RealNoFake",
+    "Seed": 18,
+    "playerOne": "[MY] Ril",
+    "playerTwo": "Oneshot Niko"
+  },
+  {
+    "Team": "Los Pollos Hermanos",
+    "Seed": 19,
+    "playerOne": "XxTheJKxX",
+    "playerTwo": "Mystifiedl"
+  },
+  {
+    "Team": "kibitzfanboys",
+    "Seed": 20,
+    "playerOne": "SMALLWAI",
+    "playerTwo": "--Glitchy--"
+  },
+  {
+    "Team": "3 DollarKeyboard",
+    "Seed": 21,
+    "playerOne": "Zilava",
+    "playerTwo": "veriff"
+  },
+  {
+    "Team": "Overjoyed",
+    "Seed": 22,
+    "playerOne": "planark",
+    "playerTwo": "Mill1424"
+  },
+  {
+    "Team": "Tyto",
+    "Seed": 23,
+    "playerOne": "[MY] Asunon",
+    "playerTwo": "ERA Yuh"
+  },
+  {
+    "Team": "Anthena",
+    "Seed": 24,
+    "playerOne": "HangarBB",
+    "playerTwo": "MightyTech"
+  },
+  {
+    "Team": "F",
+    "Seed": 25,
+    "playerOne": "GG_com2016",
+    "playerTwo": "-Terakomari"
+  },
+  {
+    "Team": "Tidur",
+    "Seed": 26,
+    "playerOne": "NezukoMalaysia",
+    "playerTwo": "Catzu"
+  },
+  {
+    "Team": "Sleepless Duo",
+    "Seed": 27,
+    "playerOne": "Benzi_LZK",
+    "playerTwo": "Prongle"
+  },
+  {
+    "Team": "Almost disabled",
+    "Seed": 28,
+    "playerOne": "NyuPenyu",
+    "playerTwo": "Best Sanallite"
+  },
+  {
+    "Team": "Appley Leafy",
+    "Seed": 29,
+    "playerOne": "ClassicNickey",
+    "playerTwo": "[ -Asriel- ]"
+  },
+  {
+    "Team": "Sengketa Blok Ambalat Incident || TPT",
+    "Seed": 30,
+    "playerOne": "FireDragon24",
+    "playerTwo": "Imar Gading"
+  },
+  {
+    "Team": "ImForcedToJoin",
+    "Seed": 31,
+    "playerOne": "Quzzuk",
+    "playerTwo": "StarThe2nd"
+  },
+  {
+    "Team": "The 5 Digits",
+    "Seed": 32,
+    "playerOne": "AADZ7",
+    "playerTwo": "n1ckClips"
+  }
+ ]
