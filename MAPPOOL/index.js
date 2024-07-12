@@ -297,11 +297,6 @@ socket.onmessage = event => {
         }, 150);
     }
 
-    if (previousState != data.tourney.manager.ipcState) {
-        checkState(data.tourney.manager.ipcState);
-        previousState = data.tourney.manager.ipcState;
-    }
-
     if (currentStage != getCurrentStage()) {
         currentStage = getCurrentStage()
         stageText.innerHTML = currentStage;
@@ -395,11 +390,16 @@ socket.onmessage = event => {
 			}
 		}
 	}
+
+    if (previousState != data.tourney.manager.ipcState) {
+        checkState(data.tourney.manager.ipcState);
+        previousState = data.tourney.manager.ipcState;
+    }
 }
 
 async function checkState(ipcState) {
     // map has ended and its the next player's turn
-    if (ipcState == 4) {
+    if (ipcState == 4 && (scoreBlueTemp != bestOfTemp || scoreRedTemp != bestOfTemp)) {
         stopPulse();
         turnButton.click();
         setTimeout(function () {
