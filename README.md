@@ -13,7 +13,7 @@ Click on "Search Directory..." and select the `_shared_assets` folder in the pro
 ### Tosu & Stream Directory
 **[Project link for tosu](https://github.com/KotRikD/tosu#readme)**
 
-To install the application, just download the latest release and export `tosu.exe` in whatever directory you want. Then in that same directory, create a static file and run `tosu.exe`.
+To install the application, just download the latest release and export `tosu.exe` in whatever directory you want. Then in that same directory, create a static folder and run `tosu.exe`.
 
 To properly import all overlays, download the latest release of this project and import it into the static folder. If you have an osu! client open, the OBS scenes should properly reflect the scenes. If there's any issue projecting the overlay on OBS, you can try finding the URL link of the individual overlays by scrolling down to the target overlay and clicking on the URL parameter.
 
