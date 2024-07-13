@@ -148,7 +148,7 @@ turnButton.addEventListener("click", function(event) {
     if (currentTurn == 0 && banCount == 2) {
         currentTurn = 1;
         currentScene == 1 ? null : pickingText.innerHTML = `${currentTurn == 0 ? playerOne.innerHTML : playerTwo.innerHTML} is currently picking${temporaryString}`;
-        turnButton.innerHTML = "CURRENTLY PICKING: TEAM 2";
+        turnButton.innerHTML = "CURRENTLY PICKING: RIGHT TEAM";
         currentScene == 1 ? null : pickingText.style.opacity = 1;
         currentScene == 1 ? null : pickingText.style.transform = "scale(1)";
         turnButton.style.backgroundColor = "rgb(105, 80, 54)";
@@ -159,7 +159,7 @@ turnButton.addEventListener("click", function(event) {
     } else if (currentTurn == 1 && banCount == 2) {
         currentTurn = 0;
         currentScene == 1 ? null : pickingText.innerHTML = `${currentTurn == 0 ? playerOne.innerHTML : playerTwo.innerHTML} is currently picking${temporaryString}`;
-        turnButton.innerHTML = "CURRENTLY PICKING: TEAM 1";
+        turnButton.innerHTML = "CURRENTLY PICKING: LEFT TEAM";
         currentScene == 1 ? null  : pickingText.style.opacity = 1;
         currentScene == 1 ? null  : pickingText.style.transform = "scale(1)";
         turnButton.style.backgroundColor = "rgb(103, 54, 105)";

@@ -89,10 +89,10 @@ Within the Mappool Overlay there are a few interactable elemenets that requires 
 ![alt text](_shared_assets/setup/beatmap.png)
 
 While hovering on any of the beatmaps,
-- Left Click to pick for **Team 1**
-- Right Click to pick for **Team 2**
-- Shift + Left Click to ban for **Team 1** (Note: there can only be 2 banned maps in the overlay at once! (as per the tourney rules))
-- Shift + Right Click to ban for **Team 2** (Note: there can only be 2 banned maps in the overlay at once! (as per the tourney rules))
+- Left Click to pick for **Left Team**
+- Right Click to pick for **Right Team**
+- Shift + Left Click to ban for **Left Team** (Note: there can only be 2 banned maps in the overlay at once! (as per the tourney rules))
+- Shift + Right Click to ban for **Right Team** (Note: there can only be 2 banned maps in the overlay at once! (as per the tourney rules))
 - Ctrl + Left Click to retract any actions (This will retract the pulsing pick aswell)
 
 **INTERACTING WITH THE CONTROL PANEL**
@@ -104,7 +104,7 @@ In order from left to right:
 ____
 - **SCENE BUTTON**: Has 2 modes: `MAPPOOL` (default) and `GAMEPLAY`. When clicking on this button, the `MAPPOOL` scene above will change to show the `GAMEPLAY` below and vice versa (try this on obs to actually see it!). **This will automatically trigger by itself once both players enter the map, and will automatically trigger again 15 seconds after the results screen has been shown. (if you switch manually before then nothing happens)**
 ____
-- **TURN BUTTON**: Has 3 modes: `NOT AVAILABLE` (default), `TEAM 1` and `TEAM 2`. In `NOT AVAILABLE` mode, clicking on the button will do nothing, as you will require to ban 2 maps before being able to interact with it. Once you banned 2 maps, the button will switch to either `TEAM 1` or `TEAM 2` depending on which team bans the 2nd map (indicating they also go first). Upon clicking the button in any of the 2 aforementioned modes will switch the mode to the other team. This concerns how the `AUTOPICK BUTTON` functions. **This will automatically trigger by itself once result screen has been shown, moving on to the next team's turn. (This will retract the pulsing pick aswell)**
+- **TURN BUTTON**: Has 3 modes: `NOT AVAILABLE` (default), `LEFT TEAM` and `RIGHT TEAM`. In `NOT AVAILABLE` mode, clicking on the button will do nothing, as you will require to ban 2 maps before being able to interact with it. Once you banned 2 maps, the button will switch to either `LEFT TEAM` or `RIGHT TEAM` depending on which team bans the 2nd map (indicating they also go first). Upon clicking the button in any of the 2 aforementioned modes will switch the mode to the other team. This concerns how the `AUTOPICK BUTTON` functions. **This will automatically trigger by itself once result screen has been shown, moving on to the next team's turn. (This will retract the pulsing pick aswell)**
 ____
 - **AUTOPICK BUTTON**: Has 2 modes: `OFF` (default) and `ON`. When turned to `ON`, whenever the client switches to any map in the pool, the overlay will automatically detect the map and pick it based on which team is showing on the `TURN BUTTON`. So for example if it is currently `TEAM 2`'s turn to pick and they pick `RC2`, upon changing the map in the client the overlay will automatically pick `RC2` for you. This will only toggle if the following conditions has been satisfied:
     - There is 2 banned maps in the overlay
