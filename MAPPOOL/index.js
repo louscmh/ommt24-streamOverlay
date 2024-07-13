@@ -414,7 +414,7 @@ async function checkState(ipcState) {
         turnButton.click();
         setTimeout(function () {
             currentScene == 1 ? sceneButton.click() : null
-        }, 15000)
+        }, 25000)
     } else if (ipcState == 3) {
         currentScene == 0 ? sceneButton.click() : null;
     }
