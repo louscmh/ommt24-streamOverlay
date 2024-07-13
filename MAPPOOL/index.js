@@ -63,6 +63,10 @@ let autoButton = document.getElementById("autoButton");
 let sceneContainer = document.getElementById("main");
 
 let pickingText = document.getElementById("pickingText");
+let leftPlayerOne = document.getElementById("leftPlayerOne");
+let leftPlayerTwo = document.getElementById("leftPlayerTwo");
+let rightPlayerOne = document.getElementById("rightPlayerOne");
+let rightPlayerTwo = document.getElementById("rightPlayerTwo");
 
 // PLACEHOLDER VARS /////////////////////////////////////////////////////////////////
 let currentFile = "";
@@ -288,6 +292,8 @@ socket.onmessage = event => {
             seeds.find(seed => seed["Team"] == tempLeft)["Seed"] > 0 ? 
                 playerOneSeed.innerHTML = `Seed ${seeds.find(seed => seed["Team"] === tempLeft)["Seed"]}` : 
                     playerOneSeed.innerHTML = "Seed X";
+            leftPlayerOne.innerHTML = seeds.find(seed => seed["Team"] === playerOne.innerHTML)["playerOne"];
+            leftPlayerTwo.innerHTML = seeds.find(seed => seed["Team"] === playerOne.innerHTML)["playerTwo"];
         }, 150);
     }
     if (tempRight != playerTwo.innerHTML && tempRight != "") {
@@ -296,6 +302,8 @@ socket.onmessage = event => {
             seeds.find(seed => seed["Team"] === tempRight)["Seed"] > 0 ?
                 playerTwoSeed.innerHTML = `Seed ${seeds.find(seed => seed["Team"] === tempRight)["Seed"]}` : 
                     playerTwoSeed.innerHTML = "Seed X";
+            rightPlayerOne.innerHTML = seeds.find(seed => seed["Team"] === playerTwo.innerHTML)["playerOne"];
+            rightPlayerTwo.innerHTML = seeds.find(seed => seed["Team"] === playerTwo.innerHTML)["playerTwo"];
         }, 150);
     }
 
