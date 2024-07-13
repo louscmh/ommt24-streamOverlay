@@ -491,7 +491,7 @@ async function setupBeatmaps() {
                 bm.pickedStatus.style.backgroundColor = "rgba(0,0,0,0)";
                 stopPulse();
                 bm.isBan == true ? banCount-- : null;
-                bm.isBan == true ? bm.isBan == false  : null;
+                bm.isBan == true ? bm.isBan = false  : null;
                 banCount < 2 ? turnButton.click() : null;
                 setTimeout(function() {
                     playerOnePick.style.opacity = "0";
@@ -576,7 +576,7 @@ async function setupBeatmaps() {
                 bm.pickedStatus.style.backgroundColor = "rgba(0,0,0,0)";
                 stopPulse();
                 bm.isBan == true ? banCount-- : null;
-                bm.isBan == true ? bm.isBan == false  : null;
+                bm.isBan == true ? bm.isBan = false  : null;
                 banCount < 2 ? turnButton.click() : null;
                 setTimeout(function() {
                     playerOnePick.style.opacity = "0";
