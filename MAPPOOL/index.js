@@ -139,8 +139,10 @@ sceneButton.addEventListener("click", function(event) {
         sceneButton.innerHTML = "CURRENT SCENE: MAPPOOL";
         sceneButton.style.backgroundColor = "red";
         sceneContainer.style.height = "1080px";
-        pickingText.style.opacity = 1;
-        pickingText.style.transform = "scale(1)";
+        if (banCount == 2) {
+            pickingText.style.opacity = 1;
+            pickingText.style.transform = "scale(1)";
+        }
     }
 })
 
