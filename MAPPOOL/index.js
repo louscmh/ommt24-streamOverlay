@@ -471,8 +471,8 @@ async function setupBeatmaps() {
                     bm.pickedStatus.style.fontSize = "25px";
                     bm.overlay.style.zIndex = 3;
                     bm.overlay.style.opacity = "0.8";
-                    bm.isBan = true;
-                    banCount++;
+                    bm.isBan == true ? null : banCount++;
+                    bm.isBan == true ? null : bm.isBan = true;
                     banCount == 2 ? currentTurn = 1 : null;
                     turnButton.click();
                     setTimeout(function() {
@@ -555,8 +555,8 @@ async function setupBeatmaps() {
                     bm.pickedStatus.style.fontSize = "25px";
                     bm.overlay.style.zIndex = 3;
                     bm.overlay.style.opacity = "0.8";
-                    bm.isBan = true;
-                    banCount++;
+                    bm.isBan == true ? null : banCount++;
+                    bm.isBan == true ? null : bm.isBan = true;
                     banCount == 2 ? currentTurn = 0 : null;
                     turnButton.click();
                     setTimeout(function() {
