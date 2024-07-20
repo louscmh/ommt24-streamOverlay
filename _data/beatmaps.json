@@ -1,15 +1,15 @@
 [
-    { "beatmapId": 2917081, "pick": "RC1"},
-    { "beatmapId": 4682349, "pick": "RC2"},
-    { "beatmapId": 1215562, "pick": "MD"},
-    { "beatmapId": 4590142, "pick": "RC4"},
-    { "beatmapId": 1948492, "pick": "RC5"},
-    { "beatmapId": 4597084, "pick": "LN1"},
-    { "beatmapId": 3960091, "pick": "LN2"},
-    { "beatmapId": 4236227, "pick": "LN3"},
-    { "beatmapId": 2576768, "pick": "HB1"},
-    { "beatmapId": 3440474, "pick": "HB2"},
-    { "beatmapId": 4682297, "pick": "SV1"},
-    { "beatmapId": 2329945, "pick": "SV2"},
-    { "beatmapId": 4200434, "pick": "TB"}
+    { "beatmapId": 4692734, "pick": "RC1"},
+    { "beatmapId": 4692779, "pick": "RC2"},
+    { "beatmapId": 4498631, "pick": "RC3"},
+    { "beatmapId": 3195261, "pick": "RC4"},
+    { "beatmapId": 4692780, "pick": "RC5"},
+    { "beatmapId": 4366089, "pick": "LN1"},
+    { "beatmapId": 4417766, "pick": "LN2"},
+    { "beatmapId": 2637067, "pick": "MD"},
+    { "beatmapId": 3774373, "pick": "HB1"},
+    { "beatmapId": 4096930, "pick": "HB2"},
+    { "beatmapId": 2929923, "pick": "SV1"},
+    { "beatmapId": 4462867, "pick": "SV2"},
+    { "beatmapId": 4692605, "pick": "TB"}
 ]

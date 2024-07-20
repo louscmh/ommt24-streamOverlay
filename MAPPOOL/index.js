@@ -460,7 +460,7 @@ async function setupBeatmaps() {
         bm.generate();
         bm.clicker.addEventListener("click", function(event) {
             if (event.shiftKey) {
-                if (banCount < 2) {
+                if (banCount < 2 && bm.mods != "MD") {
                     bm.pickedStatus.style.color = "#b285c9";
                     bm.pickedStatus.style.backgroundColor = "rgba(0, 0, 0, 0)";
                     bm.pickedStatus.style.top = "0px";
@@ -544,7 +544,7 @@ async function setupBeatmaps() {
         });
         bm.clicker.addEventListener("contextmenu", function(event) {
             if (event.shiftKey) {
-                if (banCount < 2) {
+                if (banCount < 2 && bm.mods != "MD") {
                     bm.pickedStatus.style.color = "#b285c9";
                     bm.pickedStatus.style.backgroundColor = "rgba(0, 0, 0, 0)";
                     bm.pickedStatus.style.top = "0px";
