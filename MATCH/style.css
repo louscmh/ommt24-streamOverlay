@@ -67,7 +67,8 @@
     color: #f0cdba;
     font-size:80px;
     margin-bottom:-10px;
-    width:200px;
+    width:fit-content;
+    margin-right: 20px;
 }
 
 #songDetails {
